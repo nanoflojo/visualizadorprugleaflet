@@ -1,311 +1,314 @@
+
 <!DOCTYPE html>
-<html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-	    <title>MapaRutasMTB PRUG</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-<link rel="stylesheet" href="http://makinacorpus.github.io/Leaflet.FileLayer/Font-Awesome/css/font-awesome.min.css" />
- <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   crossorigin=""></script>
-<script src="https://unpkg.com/togeojson@0.14.2"></script>
-<script src="https://unpkg.com/leaflet-filelayer@0.6.0"></script>
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-<script src="https://cdn.rawgit.com/heigeo/leaflet.wms/gh-pages/dist/leaflet.wms.js"></script>
-	      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		  <script src="https://mapawebprug.000webhostapp.com/senderos.js" type="text/javascript"></script>
-	<style>
+  <meta charset="UTF-8">
+  <title>MapaRutasMTB PRUG</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+    rel='stylesheet' />
+  <link rel="stylesheet"
+    href="https://makinacorpus.github.io/Leaflet.FileLayer/Font-Awesome/css/font-awesome.min.css" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="https://unpkg.com/togeojson@0.14.2"></script>
+  <script src="https://unpkg.com/leaflet-filelayer@0.6.0"></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/gh/heigeo/leaflet.wms/dist/leaflet.wms.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="https://mapawebprug.000webhostapp.com/senderos.js" type="text/javascript"></script>
+  <style>
+    #map {
+      width: 100%;
+      height: 700px;
+    }
 
-  #map { 
-    width: 100%;
-    height: 700px;
- }
-	.leaflet-popup-content-wrapper {
-	padding: 4px;
-    width: auto;
-	height: auto;
-	}
-	.leaflet-container a.leaflet-popup-close-button {
-	border: 2px, #999;
-	color: #000;
-	}
-	.leaflet-container a.leaflet-popup-close-button:hover {
-	color: #999;
-	}
-	.icon {
-    max-width: 80%;
-    max-height: 80%;
-    margin: 2px;
-      }
-	iframe {
-	width: auto;
-	height: auto;
-	}
-	 .legend {
-  padding: 8px 8px;
-  background: white;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
-}
-.legend h4 {
-  text-align: center;
-  font-size: 14px;
-  margin: 2px 12px 8px;
-  color: #000;
-}
+    .leaflet-popup-content-wrapper {
+      padding: 4px;
+      width: auto;
+      height: auto;
+    }
 
-.legend span {
-  position: relative;
-  bottom: 3px;
-}
+    .leaflet-container a.leaflet-popup-close-button {
+      color: #000;
+    }
 
+    .leaflet-container a.leaflet-popup-close-button:hover {
+      color: #999;
+    }
 
-	</style>
+    .icon {
+      width: 24px;
+      height: 24px;
+      margin: 2px;
+    }
+
+    iframe {
+      width: auto;
+      height: auto;
+    }
+
+    .legend {
+      padding: 8px 8px;
+      background: white;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+      border-radius: 5px;
+    }
+
+    .legend h4 {
+      text-align: center;
+      font-size: 14px;
+      margin: 2px 12px 8px;
+      color: #000;
+    }
+
+    .legend span {
+      position: relative;
+      bottom: 3px;
+    }
+  </style>
 </head>
-	<body>
-	<div align="left"><a target="_blank" href="http://maparutasmtb.blogspot.com.es/"><img src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/LogoMRmtbBaja.jpg" height="36" align="middle" /></a>&nbsp;&nbsp;&nbsp;
-				   <font size="+1", align="middle"><b>VISUALIZADOR PRUG</b></font> &nbsp; Arrastra y suelta tu ruta dentro del mapa para poder visualizarla (GPX, KML), o selecciona abriendo la carpeta:</div>
-		<div id = 'map'>
-		</div>
+
+<body>
+  <header>
+    <div align="left"><a target="_blank" href="http://maparutasmtb.blogspot.com.es/"><img
+          src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/LogoMRmtbBaja.jpg" height="36"
+          align="middle" alt="Logotipo de MapaRutasMTB" /></a>&nbsp;&nbsp;&nbsp;
+      <font size="+1" , align="middle"><b>VISUALIZADOR PRUG</b></font> &nbsp; Arrastra y suelta tu ruta dentro del mapa
+      para poder visualizarla (GPX, KML), o selecciona abriendo la carpeta:
+    </div>
+  </header>
+  <main>
+    <div id='map'>
+    </div>
     <script>
 
-//------L.TileLayer.BetterWMS js:
+      //------L.TileLayer.BetterWMS js:
 
-L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
+      L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
 
-  onAdd: function (mapid) {
-    // Triggered when the layer is added to a map.
-    //   Register a click listener, then do all the upstream WMS things
-    L.TileLayer.WMS.prototype.onAdd.call(this, mapid);
-    map.on('click', this.getFeatureInfo, this);
-  },
+        onAdd: function (mapid) {
+          // Triggered when the layer is added to a map.
+          //   Register a click listener, then do all the upstream WMS things
+          L.TileLayer.WMS.prototype.onAdd.call(this, mapid);
+          map.on('click', this.getFeatureInfo, this);
+        },
 
-  onRemove: function (mapid) {
-    // Triggered when the layer is removed from a map.
-    //   Unregister a click listener, then do all the upstream WMS things
-    L.TileLayer.WMS.prototype.onRemove.call(this, mapid);
-    map.off('click', this.getFeatureInfo, this);
-  },
+        onRemove: function (mapid) {
+          // Triggered when the layer is removed from a map.
+          //   Unregister a click listener, then do all the upstream WMS things
+          L.TileLayer.WMS.prototype.onRemove.call(this, mapid);
+          map.off('click', this.getFeatureInfo, this);
+        },
 
-  getFeatureInfo: function (evt) {
-    // Make an AJAX request to the server and hope for the best
-    var url = this.getFeatureInfoUrl(evt.latlng),
-        showResults = L.Util.bind(this.showGetFeatureInfo, this);
-    $.ajax({
-      url: url,
-      success: function (data, status, xhr) {
-        var err = typeof data === 'string' ? null : data;
-        showResults(err, evt.latlng, data);
-      },
-      error: function (xhr, status, error) {
-        showResults(error);  
-      }
-    });
-  },
-
-  getFeatureInfoUrl: function (latlng) {
-    // Construct a GetFeatureInfo request URL given a point
-    var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
-        size = this._map.getSize(),
-
-        params = {
-          request: 'GetFeatureInfo',
-          service: 'WMS',
-          srs: 'EPSG:4326',
-          styles: this.wmsParams.styles,
-          transparent: this.wmsParams.transparent,
-          version: this.wmsParams.version,      
-          format: this.wmsParams.format,
-          bbox: this._map.getBounds().toBBoxString(),
-          height: size.y,
-          width: size.x,
-          layers: this.wmsParams.layers,
-          query_layers: this.wmsParams.layers,
-          info_format: 'text/html',
-		  propertyName: 'zonifica,nombre,nom_prov,super_ha',
-        };
-
-    params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
-    params[params.version === '1.3.0' ? 'j' : 'y'] = point.y;
-
-    return this._url + L.Util.getParamString(params, this._url, true);
-  },
-
-  showGetFeatureInfo: function (err, latlng, content) {
-    if (err) { console.log(err); return; } // do nothing if there's an error
-
-    // Otherwise show the content in a popup, or something.
-    L.popup({ maxWidth: 800})
-      .setLatLng(latlng)
-      .setContent(content)
-      .openOn(this._map);
-  }
-});
-
-L.tileLayer.betterWms = function (url, options) {
-  return new L.TileLayer.BetterWMS(url, options);  
-};
-
-        var map = new L.Map('map', {
-	center: new L.LatLng(40.9000000, -3.9675000000), 
-	zoom: 11, 
-		fullscreenControl: true,
-  });
-
-  var cyclosm = L.tileLayer('https://dev.{s}.tile.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
-	maxZoom: 20,
-	attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
-var OSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-	});
-var mTopo = new L.tileLayer(
-            "https://www.ign.es/wmts/mapa-raster?request=getTile&layer=MTN&TileMatrixSet=GoogleMapsCompatible&TileMatrix={z}&TileCol={x}&TileRow={y}&format=image/jpeg",{
-                id:"igntopo",
-                zIndex:1,
-                maxZoom:20,
-                //opacity:0.60,
-                updateWhenIdle:!0,
-                keepBuffer:4,
-                attribution:'© <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
-			}
-        );
-        var pnoa = new L.tileLayer(
-            "https://www.ign.es/wmts/pnoa-ma?request=getTile&layer=OI.OrthoimageCoverage&TileMatrixSet=GoogleMapsCompatible&TileMatrix={z}&TileCol={x}&TileRow={y}&format=image/jpeg",{
-                id:"ignpnoa",
-                zIndex:1,
-                maxZoom:20,
-                updateWhenIdle:!0,
-                keepBuffer:4,
-                attribution:'Ortofoto PNOA CC-BY 4.0 <a href="http://www.scne.es" target="_blank"><b>scne.es</b></a>'
+        getFeatureInfo: function (evt) {
+          // Make an AJAX request to the server and hope for the best
+          var url = this.getFeatureInfoUrl(evt.latlng),
+            showResults = L.Util.bind(this.showGetFeatureInfo, this);
+          $.ajax({
+            url: url,
+            success: function (data, status, xhr) {
+              var err = typeof data === 'string' ? null : data;
+              showResults(err, evt.latlng, data);
+            },
+            error: function (xhr, status, error) {
+              showResults(error);
             }
-        );
+          });
+        },
 
-var IGNBase_Nomen =	L.tileLayer.wms('http://www.ign.es/wms-inspire/ign-base', {
-	layers: 'IGNBaseOrto',
-	format: 'image/png',
-	transparent: true,
-	continuousWorld : true,
-	attribution: '© <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
-                    });
-						var mTopo = new L.tileLayer(
-            "https://www.ign.es/wmts/mapa-raster?request=getTile&layer=MTN&TileMatrixSet=GoogleMapsCompatible&TileMatrix={z}&TileCol={x}&TileRow={y}&format=image/jpeg",{
-                id:"igntopo",
-                zIndex:1,
-                maxZoom:20,
-                //opacity:0.60,
-                updateWhenIdle:!0,
-                keepBuffer:4,
-                attribution:'© <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
-            }
-        );
-	var layer_OpenCycleMap_1 = 
-		L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=081ff7d83c0549c7a758fdd4df478f0f', {
-  	transparent: false,
-	continuousWorld : true,
-	attribution: 'Map data &copy; <a target="_blank" href="https://www.opencyclemap.org/">OpenCycleMap</a>',
-	maxZoom: 20
-});
-      var Spain_IGNBase = L.tileLayer.wms('http://www.ign.es/wms-inspire/ign-base', {
-	layers: 'IGNBaseTodo',
-	format: 'image/png',
-	transparent: true,
-	continuousWorld : true,
-	attribution: '© CC-BY 4.0 <a href="http://www.scne.es" target="_blank"><b>scne.es</b></a>'
-});
-var PnoaNomen = L.layerGroup([pnoa,IGNBase_Nomen]).addTo(map);
+        getFeatureInfoUrl: function (latlng) {
+          // Construct a GetFeatureInfo request URL given a point
+          var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
+            size = this._map.getSize(),
 
-var prug = L.tileLayer.betterWms("https://idecyl.jcyl.es/geoserver/am/wms?", {
-            layers: 'am:ren_cyl_pnsg_zonific',
-            format: 'image/png',
-            transparent: true,
-			attribution: 'PRUG PN Guadarrama <a href="https://www.jcyl.es" target="_blank"> © Junta de Castilla y León</a>'
-          }).addTo(map);
-		  
-		function estilo(feature) {
-            return {
-                weight: 2,
-                opacity: 1,
-                color: 'blue',
-                dashArray: '4'                
+            params = {
+              request: 'GetFeatureInfo',
+              service: 'WMS',
+              srs: 'EPSG:4326',
+              styles: this.wmsParams.styles,
+              transparent: this.wmsParams.transparent,
+              version: this.wmsParams.version,
+              format: this.wmsParams.format,
+              bbox: this._map.getBounds().toBBoxString(),
+              height: size.y,
+              width: size.x,
+              layers: this.wmsParams.layers,
+              query_layers: this.wmsParams.layers,
+              info_format: 'text/html',
+              propertyName: 'zonifica,nombre,nom_prov,super_ha',
             };
-        };
-var ViasCiclistas = L.tileLayer.betterWms("https://idecyl.jcyl.es/geoserver/am/wms?", {
-            layers: 'am:ren_cyl_pnsg_actvs_vias_cicl',
-            format: 'image/png',
-            transparent: true,
-			attribution: 'PRUG PN Guadarrama <a href="https://www.jcyl.es" target="_blank"> © Junta de Castilla y León</a>'
-          }).addTo(map);
 
-          var baseMaps = {
-			"Satélite": PnoaNomen,
-            "OpenStreetMap": OSM,
-            "Raster IGN": mTopo,
-			'Cycle Map': layer_OpenCycleMap_1,
-			'CyclOSM': cyclosm,
-			'Callejero': Spain_IGNBase,
+          params[params.version === '1.3.0' ? 'i' : 'x'] = point.x;
+          params[params.version === '1.3.0' ? 'j' : 'y'] = point.y;
 
-          };
-          var overlayMaps = {
-            "Prug PN Guadarrama": prug,
-			"Vías ciclistas autorizadas": ViasCiclistas,
-          };
-          L.control.layers(baseMaps, overlayMaps).addTo(map);
-//---Control.FileLayer
-    var style = {color:"#ff7800", fillColor: "#ff7800", opacity: 1.0, fillOpacity: 0.8, weight: 4, clickable: false};
-    // icon style
-    var myIcon = L.icon({
-    iconUrl: 'http://mapamtbmadrid.x10host.com/MapaRutasMTB/Iconos/Red_flag_OK_24.png',
-    //iconAnchor: [16, 37],
-    iconAnchor: [9, 30],
-    popupAnchor: [0, -28]
-    });
+          return this._url + L.Util.getParamString(params, this._url, true);
+        },
 
-        L.Control.FileLayerLoad.LABEL = '<img class="icon" src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/carpetamapacatastro.png" alt="file icon"/>';
+        showGetFeatureInfo: function (err, latlng, content) {
+          if (err) { console.log(err); return; } // do nothing if there's an error
 
-    var geoJsonOptions = {
-        onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.name);},
-        style: style,
-            pointToLayer: function (data, latlng) {
-            return L.marker(latlng, {icon: myIcon});
+          // Otherwise show the content in a popup, or something.
+          L.popup({ maxWidth: 800 })
+            .setLatLng(latlng)
+            .setContent(content)
+            .openOn(this._map);
         }
-    }
-    L.Control.fileLayerLoad({
+      });
+
+      L.tileLayer.betterWms = function (url, options) {
+        return new L.TileLayer.BetterWMS(url, options);
+      };
+
+      var map = new L.Map('map', {
+        center: new L.LatLng(40.9000000, -3.9675000000),
+        zoom: 11,
+        fullscreenControl: true,
+      });
+      var OpenTopoMap = L.tileLayer('http://c.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '<a target="_blank" href="https://opentopomap.org/#map=5/49.000/10.000">OpenTopoMap</a> CC-BY-SA | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      });
+      var OSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+      });
+      var mTopo = new L.tileLayer(
+        "https://www.ign.es/wmts/mapa-raster?request=getTile&layer=MTN&TileMatrixSet=GoogleMapsCompatible&TileMatrix={z}&TileCol={x}&TileRow={y}&format=image/jpeg", {
+        id: "igntopo",
+        zIndex: 1,
+        maxZoom: 20,
+        //opacity:0.60,
+        updateWhenIdle: !0,
+        keepBuffer: 4,
+        attribution: '© <a href="http://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
+      }
+      );
+      var pnoa = new L.tileLayer(
+        "https://www.ign.es/wmts/pnoa-ma?request=getTile&layer=OI.OrthoimageCoverage&TileMatrixSet=GoogleMapsCompatible&TileMatrix={z}&TileCol={x}&TileRow={y}&format=image/jpeg", {
+        id: "ignpnoa",
+        zIndex: 1,
+        maxZoom: 20,
+        attribution: 'Ortofoto PNOA CC-BY 4.0 <a href="http://www.scne.es" target="_blank"><b>scne.es</b></a>'
+      }
+      );
+      var IGNBase_Nomen = L.tileLayer.wms('https://www.ign.es/wms-inspire/ign-base', {
+        layers: 'IGNBaseOrto',
+        format: 'image/png',
+        transparent: true,
+        attribution: '© <a href="https://www.ign.es/ign/main/index.do" target="_blank">Instituto Geográfico Nacional de España</a>'
+      });
+      var layer_OpenCycleMap_1 =
+        L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=081ff7d83c0549c7a758fdd4df478f0f', {
+          transparent: false,
+          continuousWorld: true,
+          attribution: 'Map data &copy; <a target="_blank" href="https://www.opencyclemap.org/">OpenCycleMap</a>',
+          maxZoom: 20
+        });
+      var Spain_IGNBase = L.tileLayer.wms('http://www.ign.es/wms-inspire/ign-base', {
+        layers: 'IGNBaseTodo',
+        format: 'image/png',
+        transparent: true,
+        continuousWorld: true,
+        attribution: '© CC-BY 4.0 <a href="http://www.scne.es" target="_blank"><b>scne.es</b></a>'
+      });
+      var PnoaNomen = L.layerGroup([pnoa, IGNBase_Nomen]).addTo(map);
+      var prug = L.tileLayer.betterWms("https://idecyl.jcyl.es/geoserver/am/wms?", {
+        layers: 'am:ren_cyl_pnsg_zonific',
+        format: 'image/png',
+        transparent: true,
+        attribution: 'PRUG PN Guadarrama <a href="https://www.jcyl.es" target="_blank"> © Junta de Castilla y León</a>'
+      }).addTo(map);
+      var ViasCiclistas = L.tileLayer.betterWms("https://idecyl.jcyl.es/geoserver/am/wms?", {
+        layers: 'am:ren_cyl_pnsg_actvs_vias_cicl',
+        format: 'image/png',
+        transparent: true,
+        attribution: 'PRUG PN Guadarrama <a href="https://www.jcyl.es" target="_blank"> © Junta de Castilla y León</a>',
+      }).addTo(map);
+
+      var baseMaps = {
+        "Satélite": PnoaNomen,
+        "OpenStreetMap": OSM,
+        "Raster IGN": mTopo,
+        'Cycle Map': layer_OpenCycleMap_1,
+        'Open Topo Map': OpenTopoMap,
+        'Callejero': Spain_IGNBase,
+
+      };
+      var overlayMaps = {
+        "Prug PN Guadarrama": prug,
+        "Vías ciclistas autorizadas": ViasCiclistas,
+      };
+      L.control.layers(baseMaps, overlayMaps).addTo(map);
+      //---Control.FileLayer
+      var style = { color: "#ff7800", fillColor: "#ff7800", opacity: 1.0, fillOpacity: 0.8, weight: 4, clickable: false };
+      // icon style
+      var myIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/Red_flag_OK_24.png',
+        //iconAnchor: [16, 37],
+        iconAnchor: [9, 30],
+        popupAnchor: [0, -28]
+      });
+
+      L.Control.FileLayerLoad.LABEL = '<img class="icon" src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/carpetamapacatastro.png" alt="file icon"/>';
+
+      var geoJsonOptions = {
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(feature.properties.name);
+        },
+        style: style,
+        pointToLayer: function (data, latlng) {
+          return L.marker(latlng, { icon: myIcon });
+        }
+      }
+      L.Control.fileLayerLoad({
         layerOptions: geoJsonOptions,
-    }).addTo(map); 
+      }).addTo(map);
 
 
-L.control.scale({imperial: false}).addTo(map);
+      L.control.scale({ imperial: false }).addTo(map);
 
-// Insertando una leyenda en el mapa
-  var legend = L.control({position: 'bottomright'});
+      // Insertando una leyenda en el mapa
+      var legend = L.control({ position: 'bottomright' });
 
-legend.onAdd = function (map) {
+      legend.onAdd = function (map) {
 
-  var div = L.DomUtil.create("div", "legend");
-  div.innerHTML += "<h4>P.N. Sierra de  Guadarrama</h4>";
-  div.innerHTML += '<img src="https://idecyl.jcyl.es/geoserver/am/ows?service=WMS&request=GetLegendGraphic&format=image/png&width=15&height=15&layer=am:ren_cyl_pnsg_zonific&"/><br>';
-  div.innerHTML += '<img src="https://idecyl.jcyl.es/geoserver/am/ows?service=WMS&request=GetLegendGraphic&format=image/png&width=15&height15&layer=am:ren_cyl_pnsg_actvs_vias_cicl& "/><span> &nbsp;<font size=2>Vías Ciclistas</font></span><br>';
+        var div = L.DomUtil.create("div", "legend");
+        div.innerHTML += "<h4>P.N. Sierra de  Guadarrama</h4>";
+        div.innerHTML += '<img src="https://idecyl.jcyl.es/geoserver/am/ows?service=WMS&request=GetLegendGraphic&format=image/png&width=15&height=15&layer=am:ren_cyl_pnsg_zonific&" alt="Leyenda de zonificación del Parque Nacional de Guadarrama" /><br>';
+        div.innerHTML += '<img src="https://idecyl.jcyl.es/geoserver/am/ows?service=WMS&request=GetLegendGraphic&format=image/png&width=15&height=15&layer=am:ren_cyl_pnsg_actvs_vias_cicl&" alt="Leyenda de vías ciclistas autorizadas" /><span> &nbsp;<font size=2>Vías Ciclistas</font></span><br>';
 
-  return div;
-};
+        return div;
+      };
 
-legend.addTo(map);
+      legend.addTo(map);
 
-</script>
-<p><img class="icon" src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/carpetamapacatastro.png" style="vertical-align: middle; margin-bottom: 10px;" width="24" /> &nbsp; Carga tu ruta (gpx, kml) y comprueba por donde pasa dentro del Parque Nacional de la Sierra de Guadarrama.</p>
-<p><i>Las pistas autorizadas para bicicleta se visualizan a partir de 1000 m. de zoom.</br>
-Pincha dentro de las zonas para ver más información.</i></p>
-<p>
-<a target="_blank" href="http://www.bocm.es/boletin/CM_Orden_BOCM/2020/02/29/BOCM-20200229-1.PDF">BOCM 18/2020 Comunidad de Madrid</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a target="_blank" href="http://bocyl.jcyl.es/boletines/2019/05/24/pdf/BOCYL-D-24052019-1.pdf">BOCYL 16/2019 Castilla y León</a></p><br>
-<div align="center">
-<img src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/30px-Copyleft.png" style="vertical-align: middle; margin-bottom: 8px;" width="20" /> &nbsp; <b>2020</b> &nbsp;
-<a target="_blank" href="http://maparutasmtb.blogspot.com.es/"><img src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/LogoMRmtbBaja.jpg" style="vertical-align: bottom;" height="48" /></a>
-</div>
-	</body>
+    </script>
+    <p><img class="icon" src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/carpetamapacatastro.png"
+        alt="Icono para cargar rutas" style="vertical-align: middle; margin-bottom: 10px;" width="24" /> &nbsp; Carga tu
+      ruta (gpx, kml) y comprueba por
+      donde pasa dentro del Parque Nacional de la Sierra de Guadarrama.</p>
+    <p><i>Las pistas autorizadas para bicicleta se visualizan a partir de 1000 m. de zoom.</br>
+        Pincha dentro de las zonas para ver más información.</i></p>
+    <p>
+      <a target="_blank" href="http://www.bocm.es/boletin/CM_Orden_BOCM/2020/02/29/BOCM-20200229-1.PDF">BOCM 18/2020
+        Comunidad de Madrid</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<a target="_blank"
+        href="http://bocyl.jcyl.es/boletines/2019/05/24/pdf/BOCYL-D-24052019-1.pdf">BOCYL 16/2019 Castilla y León</a>
+    </p>
+  </main>
+  <footer>
+    <div align="center">
+      <img src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/30px-Copyleft.png"
+        style="vertical-align: middle; margin-bottom: 8px;" width="20" alt="Icono de copyleft" /> &nbsp; <b>2020</b>
+      &nbsp;
+      <a target="_blank" href="http://maparutasmtb.blogspot.com.es/"><img
+          src="https://raw.githubusercontent.com/nanoflojo/MaparutasMTB/master/LogoMRmtbBaja.jpg"
+          style="vertical-align: bottom;" height="48" alt="Logotipo de MapaRutasMTB" /></a>
+    </div>
+  </footer>
+</body>
+
 </html>
