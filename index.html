@@ -215,9 +215,8 @@
         attribution: '© CC-BY 4.0 <a href="http://www.scne.es" target="_blank"><b>scne.es</b></a>'
       });
       var PnoaNomen = L.layerGroup([pnoa, IGNBase_Nomen]).addTo(map);
-      var prug = L.tileLayer.betterWms("https://idecyl.jcyl.es/geoserver/am/wms?", {
-        layers: 'am:ren_cyl_pnsg_zonific',
-        format: 'image/png',
+      var prug = https://sigred.oapn.es/geoserverOAPN/ZonificacionPRUG/wms", {
+        layers: 'view_zon_zonificacion_prug',
         transparent: true,
         attribution: 'PRUG PN Guadarrama <a href="https://www.jcyl.es" target="_blank"> © Junta de Castilla y León</a>'
       }).addTo(map);
